@@ -1,13 +1,9 @@
 package com.hungnd.androidday9
-
 import android.app.WallpaperManager
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -32,10 +28,8 @@ class ShowItemsClickActivity : AppCompatActivity() {
                 BitmapFactory.decodeResource(resources, bundle?.getInt("imvAvt")!!)
             val wallpaperManager = WallpaperManager.getInstance(baseContext)
             wallpaperManager.setBitmap(bitmap)
-            val snack = Snackbar.make(it, "Success !!", Snackbar.LENGTH_LONG)
-            snack.show()
+             Snackbar.make(it, "Success !!", Snackbar.LENGTH_LONG).show()
             btn_Set_Wallpaper.visibility = View.GONE
-            finish()
         }
 
     }
