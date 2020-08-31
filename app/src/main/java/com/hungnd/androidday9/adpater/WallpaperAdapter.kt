@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hungnd.androidday9.MainActivity
 import com.hungnd.androidday9.interfaces.ItemsClick
 import com.hungnd.androidday9.R
@@ -42,7 +43,12 @@ class WallpaperAdapter(
     }
 
     override fun onBindViewHolder(holder: HungDzHolder, position: Int) {
-        holder.imvAvatar.setImageResource(dataWallpaper[position].imvAvt)
+        val wallPP = dataWallpaper[position]
+        Glide
+            .with(holder.imvAvatar)
+            .load(wallPP.imvAvt)
+            .placeholder(R.mipmap.ic_launcher)
+            .into(holder.imvAvatar);
         holder.tvMonth.text = dataWallpaper[position].tvMonth
         holder.tvName.text = dataWallpaper[position].tvName
     }
