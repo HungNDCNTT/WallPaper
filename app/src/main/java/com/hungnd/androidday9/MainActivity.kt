@@ -2,10 +2,10 @@ package com.hungnd.androidday9
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.AnimationUtils
+import android.transition.Transition
+import android.transition.TransitionInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.transition.TransitionInflater
 import com.hungnd.androidday9.adpater.WallpaperAdapter
 import com.hungnd.androidday9.interfaces.ItemsClick
 import com.hungnd.androidday9.model.WallpaperModel
@@ -50,9 +50,12 @@ class MainActivity : AppCompatActivity(), ItemsClick {
         bundle.putString("tvMonth", dataWallPaper.get(position).tvMonth)
         bundle.putString("tvName", dataWallPaper.get(position).tvName)
         intent.putExtras(bundle)
-        val exitTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_top)
-        val enterTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.fade)
-
+        val exitTrandition: Transition =
+            TransitionInflater.from(this).inflateTransition(android.R.transition.slide_top)
+        window.exitTransition = exitTrandition
+        val enterTransition: Transition =
+            TransitionInflater.from(this).inflateTransition(android.R.transition.fade)
+        window.enterTransition = enterTransition
         startActivity(intent)
     }
 }

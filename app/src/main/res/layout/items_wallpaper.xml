@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
-    android:padding="1dp"
-    android:layout_height="280dp">
+    android:layout_height="280dp"
+    android:background="#0C0C0C"
+    android:padding="1dp">
 
     <ImageView
         android:id="@+id/imv_Avt"

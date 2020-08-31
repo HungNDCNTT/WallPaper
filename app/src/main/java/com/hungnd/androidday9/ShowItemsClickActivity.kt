@@ -24,11 +24,10 @@ class ShowItemsClickActivity : AppCompatActivity() {
             Toast.makeText(this, "No Hope", Toast.LENGTH_SHORT).show()
         }
         btn_Set_Wallpaper.setOnClickListener {
-            val bitmap: Bitmap =
-                BitmapFactory.decodeResource(resources, bundle?.getInt("imvAvt")!!)
+            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, bundle?.getInt("imvAvt")!!)
             val wallpaperManager = WallpaperManager.getInstance(baseContext)
             wallpaperManager.setBitmap(bitmap)
-             Snackbar.make(it, "Success !!", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(it, "Success !!", Snackbar.LENGTH_LONG).show()
             btn_Set_Wallpaper.visibility = View.GONE
         }
 
