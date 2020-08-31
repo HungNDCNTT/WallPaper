@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity(), ItemsClick {
         bundle.putString("tvMonth", dataWallPaper.get(position).tvMonth)
         bundle.putString("tvName", dataWallPaper.get(position).tvName)
         intent.putExtras(bundle)
-        val exitTrandition: Transition =
-            TransitionInflater.from(this).inflateTransition(android.R.transition.slide_top)
-        window.exitTransition = exitTrandition
+        val exitTransition: Transition =
+            TransitionInflater.from(this).inflateTransition(android.R.transition.explode)
+        window.exitTransition = exitTransition
         val enterTransition: Transition =
             TransitionInflater.from(this).inflateTransition(android.R.transition.fade)
         window.enterTransition = enterTransition
