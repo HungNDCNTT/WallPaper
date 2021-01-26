@@ -1,24 +1,34 @@
 package com.hungnd.androidday9
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.transition.Transition
 import android.transition.TransitionInflater
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hungnd.androidday9.adpater.WallpaperAdapter
 import com.hungnd.androidday9.interfaces.ItemsClick
 import com.hungnd.androidday9.model.WallpaperModel
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ItemsClick {
+class WallpaperFragment : Fragment(), ItemsClick {
     private val dataWallPaper = ArrayList<WallpaperModel>()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setRecycleView()
+    private var rcvWallpaper: RecyclerView? = null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.activity_main, container, false)
         initData()
+        rcvWallpaper = view?.findViewById(R.id.rcv_Show_WallPaper)
+        rcvWallpaper?.layoutManager = GridLayoutManager(activity, 2)
+        rcvWallpaper?.adapter = WallpaperAdapter(dataWallPaper, this)
+        return view
     }
 
     private fun initData() {
@@ -37,25 +47,16 @@ class MainActivity : AppCompatActivity(), ItemsClick {
 
     }
 
-    private fun setRecycleView() {
-        rcv_Show_WallPaper.setHasFixedSize(true)
-        rcv_Show_WallPaper.layoutManager = GridLayoutManager(this, 2)
-        rcv_Show_WallPaper.adapter = WallpaperAdapter(dataWallPaper, this)
-    }
 
     override fun onItemsClick(position: Int) {
-        val intent = Intent(this, ShowItemsClickActivity::class.java)
-        val bundle = Bundle()
-        bundle.putInt("imvAvt", dataWallPaper.get(position).imvAvt)
-        bundle.putString("tvMonth", dataWallPaper.get(position).tvMonth)
-        bundle.putString("tvName", dataWallPaper.get(position).tvName)
-        intent.putExtras(bundle)
         val exitTransition: Transition =
-            TransitionInflater.from(this).inflateTransition(android.R.transition.explode)
-        window.exitTransition = exitTransition
+            TransitionInflater.from(activity).inflateTransition(android.R.transition.explode)
+        setExitTransition(exitTransition)
         val enterTransition: Transition =
-            TransitionInflater.from(this).inflateTransition(android.R.transition.fade)
-        window.enterTransition = enterTransition
-        startActivity(intent)
+            TransitionInflater.from(activity).inflateTransition(android.R.transition.fade)
+        setEnterTransition(enterTransition)
+        (activity as WallpaperActivity?)
+            ?.DetailWallpaper(dataWallPaper[position])
+
     }
 }
