@@ -12,13 +12,13 @@ class WallpaperActivity : AppCompatActivity() {
         setContentView(R.layout.activity_wallpaper_activityy)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frame, WallpaperFragment())
+            .add(R.id.frame, WallpaperFragment()).addToBackStack("")
             .commit()
 
     }
 
     fun DetailWallpaper(wallPaper: WallpaperModel) {
-        supportFragmentManager.beginTransaction().replace(R.id.frame, DetailWallpaperFragment(wallPaper))
+        supportFragmentManager.beginTransaction().replace(R.id.frame, DetailWallpaperFragment(wallPaper)).addToBackStack("")
             .commit()
     }
 }

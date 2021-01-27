@@ -14,12 +14,12 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.hungnd.androidday9.model.WallpaperModel
+import kotlinx.android.synthetic.main.show_items_click.*
 import java.lang.Exception
 
 class DetailWallpaperFragment(wallpaper: WallpaperModel) : Fragment() {
 
     val wallpaperModel: WallpaperModel = wallpaper
-    var setSuccess: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,16 +38,14 @@ class DetailWallpaperFragment(wallpaper: WallpaperModel) : Fragment() {
             Thread {
                 try {
                     if (wallpaperModel != null) {
-                        val result = WallpaperManager.getInstance(context).setResource(wallpaperModel.imvAvt)
-                        setSuccess = true
-                    }
-                    if (setSuccess == true) {
-                        Toast.makeText(context, "Ok", Toast.LENGTH_LONG).show()
+                     WallpaperManager.getInstance(context).setResource(wallpaperModel.imvAvt)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }.start()
+            btnSetWallpaper.visibility=View.INVISIBLE
+            Snackbar.make(view, "Success !!", Snackbar.LENGTH_LONG).show()
         }
         return view
     }
